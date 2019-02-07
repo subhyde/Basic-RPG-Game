@@ -23,3 +23,4 @@ class User : public Character
     public:
         User();
 };
+//

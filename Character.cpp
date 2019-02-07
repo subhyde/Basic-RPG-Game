@@ -4,7 +4,7 @@
 #include "Windows.h"
 using namespace std;
 
-
+//
 bool Character::Battle(Character Monster, short level)
 {
     srand(time(NULL));
