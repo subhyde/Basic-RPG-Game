@@ -3,25 +3,28 @@ using namespace std;
 
 class Character
 {
+  protected:
     string NAME;
     short LVL;
     float HP;
     float ARMOR;
     short DAMAGE;
 
-    public:
-        bool Battle(Character);
-        Character();
-        Character(short);
-        string inventory[4][4]= {"health potion", "damage boost potion", " shield potion", "instakill potion",0,0,0,0};
-
+  public:
+    Character();
+    Character(short);
+    friend class User;
 };
 
 class User : public Character
 {
     short EXP;
     short KILLS;
+    string INVENTORY[4] = {"health potion", "damage boost potion", "shield potion", "instakill potion"};
 
-    public:
-        User();
+  public:
+    User();
+    bool Battle(Character, short);
+    bool accessInventory();
+    
 };
