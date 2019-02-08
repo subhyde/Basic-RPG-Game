@@ -19,11 +19,8 @@ bool User::Battle(Character Monster, short level)
 
         if (option == 2)
         {
-            for (int item = 0; item < 4; item++)
-            {
-                cout << this->INVENTORY[item] << endl << endl;
-                continue;
-            }
+            User::displayInventory();
+            continue;
         }
 
         else if (option == 1)
@@ -41,6 +38,9 @@ bool User::Battle(Character Monster, short level)
             {
                 cout << "You have killed " << Monster.NAME << " " << level + 1 << "!" << endl
                      << endl;
+                this->LVL++;
+                cout << "Get ready for the next monster. He will be tougher." << endl;
+    
                 Sleep(1000);
                 win = true;
                 break;
@@ -48,15 +48,15 @@ bool User::Battle(Character Monster, short level)
 
             damage = rand() % Monster.DAMAGE + 1;
             this->HP -= damage + this->ARMOR;
-            cout << Monster.NAME << " " << level + 1 << " did " << damage + this->ARMOR << " damage!" << endl << endl;
+            cout << Monster.NAME << " " << level + 1 << " did " << damage + this->ARMOR << " damage!" << endl
+                 << endl;
             if (damage == 0)
                 cout << "LUL it missed!!!!!!!!! lulululululul!" << endl;
             Sleep(1000);
             if (this->HP <= 0)
             {
-                cout << endl
-                     << Monster.NAME << " " << level + 1 << " has killed you!" << endl
-                     << endl;
+                cout << Monster.NAME << " " << level + 1 << " has killed you!" << endl
+                    << endl;
                 Sleep(1000);
                 win = false;
                 break;
@@ -84,6 +84,7 @@ bool User::Battle(Character Monster, short level)
             Sleep(1000);
         }
     }
+
     return win;
 }
 
@@ -95,16 +96,25 @@ Character::Character()
     this->DAMAGE = 10;
     this->ARMOR = 0;
 }
-Character::Character(short playerLVL)
+Character::Character(short LVL)
 {
     this->NAME = "Stronger Monster";
-    this->LVL = playerLVL;
+    this->LVL = LVL;
     this->HP = 100;
-    this->DAMAGE = 10 * playerLVL * .75;
-    this->ARMOR = playerLVL;
+    this->DAMAGE = 10 * LVL * .75;
+    this->ARMOR = LVL;
 }
 
 User::User()
 {
-    this->EXP = 0;
+    this->LVL = 0;
 }
+
+void User::displayInventory()
+{
+    for (int item = 0; item < 4; item++)
+        cout << this->INVENTORY[0][item] << "(" << this->INVENTORY[1][item] << ")" << endl
+             << endl;
+}
+
+short User::retrievePlayerLevel() { return this->LVL; }

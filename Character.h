@@ -18,13 +18,15 @@ class Character
 
 class User : public Character
 {
-    short EXP;
     short KILLS;
-    string INVENTORY[4] = {"health potion", "damage boost potion", "shield potion", "instakill potion"};
+    string INVENTORY[4][4] = {{"health potion", "damage boost potion", "shield potion", "instakill potion"}, {"0", "0", "0", "0"}};
 
   public:
     User();
+    short retrievePlayerLevel();
     bool Battle(Character, short);
-    bool accessInventory();
+    void displayInventory();
+    /* void editInventory(); -> to be implemented. this function will allow new items to be added if inventory is empty; if duplicate item obtained, will increment. */
+
     
 };

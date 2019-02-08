@@ -9,29 +9,28 @@ int main()
     bool win = true;
     User Player;
     Character Monster;
-    short levelCount = 0;
 
-    cout << endl << "Battle " << levelCount + 1 << endl << "-----------------" << endl << endl;
+
+    cout << endl << "Battle " << Player.retrievePlayerLevel() + 1 << endl << "-----------------" << endl << endl;
     Sleep(2000);
-    win = Player.Battle(Monster, levelCount);
+    win = Player.Battle(Monster, Player.retrievePlayerLevel());
 
     while(true)
     {
         if (win)
         {
-            levelCount++;
             User Player;
-            Character Monster(levelCount);
-            cout << endl << "Battle " << levelCount + 1 << endl << "-----------------" << endl;
+            Character Monster(Player.retrievePlayerLevel());
+            cout << endl << "Battle " << Player.retrievePlayerLevel() + 1 << endl << "-----------------" << endl;
             Sleep(2000);
-            win = Player.Battle(Monster, levelCount);
+            win = Player.Battle(Monster, Player.retrievePlayerLevel());
 
         }
         else
         {
             win = false;
             cout << "You LOSE!" << endl;
-            cout << "Kills: " << levelCount;
+            cout << "Kills: " << Player.retrievePlayerLevel();
             break;
         }
     }
