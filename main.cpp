@@ -10,21 +10,24 @@ int main()
     User Player;
     Character Monster;
 
-
-    cout << endl << "Battle " << Player.retrievePlayerLevel() + 1 << endl << "-----------------" << endl << endl;
+    cout << endl
+         << "Battle " << Player.retrievePlayerLevel() + 1 << endl
+         << "-----------------" << endl
+         << endl;
     Sleep(2000);
     win = Player.Battle(Monster, Player.retrievePlayerLevel());
 
-    while(true)
+    while (true)
     {
         if (win)
         {
-            User Player;
+            Player.prepareNextRound();
             Character Monster(Player.retrievePlayerLevel());
-            cout << endl << "Battle " << Player.retrievePlayerLevel() + 1 << endl << "-----------------" << endl;
+            cout << endl
+                 << "Battle " << Player.retrievePlayerLevel() + 1 << endl
+                 << "-----------------" << endl;
             Sleep(2000);
             win = Player.Battle(Monster, Player.retrievePlayerLevel());
-
         }
         else
         {

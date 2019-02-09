@@ -33,15 +33,15 @@ bool User::Battle(Character Monster, short level)
             cout << "You did " << damage + Monster.ARMOR << " damage!" << endl;
             if (damage == 0)
                 cout << "You Missed Idiot." << endl;
-            Sleep(1000);
+            //Sleep(1000);
             if (Monster.HP <= 0)
             {
                 cout << "You have killed " << Monster.NAME << " " << level + 1 << "!" << endl
                      << endl;
-                this->LVL++;
+                cout << "You have obtained a health potion!" << endl;
+                bool obtained = editInventory("health potion");
                 cout << "Get ready for the next monster. He will be tougher." << endl;
-    
-                Sleep(1000);
+                //Sleep(1000);
                 win = true;
                 break;
             }
@@ -52,12 +52,12 @@ bool User::Battle(Character Monster, short level)
                  << endl;
             if (damage == 0)
                 cout << "LUL it missed!!!!!!!!! lulululululul!" << endl;
-            Sleep(1000);
+            //Sleep(1000);
             if (this->HP <= 0)
             {
                 cout << Monster.NAME << " " << level + 1 << " has killed you!" << endl
                     << endl;
-                Sleep(1000);
+                //Sleep(1000);
                 win = false;
                 break;
             }
@@ -81,7 +81,7 @@ bool User::Battle(Character Monster, short level)
                 cout << "-------------------------------------------------------" << endl
                      << endl;
             }
-            Sleep(1000);
+            //Sleep(1000);
         }
     }
 
@@ -117,4 +117,44 @@ void User::displayInventory()
              << endl;
 }
 
-short User::retrievePlayerLevel() { return this->LVL; }
+bool User::editInventory(string item)
+{
+    if (this->INVENTORY[0][3].length() == 0)
+        return false;
+
+    bool match = false;
+    for(int i = 0; i < 4; i++)
+    {
+        if(item == this->INVENTORY[0][i])
+        {
+            short temp = stoi(this->INVENTORY[1][i]);
+            this->INVENTORY[1][i] = to_string(++temp);
+            match = true;
+            break;
+        }
+    }
+    if(!match)
+    {
+        if(this->INVENTORY[0][3].length() != 0)
+            return false;
+        for(int i = 0; i < 4; i++)
+        {
+            if(this->INVENTORY[0][i].length() == 0)
+            {
+                this->INVENTORY[0][i] = item;
+                short temp = stoi(this->INVENTORY[1][i]);
+                this->INVENTORY[1][i] = to_string(++temp);
+            }
+        }
+    }
+        cout << "*" << item << " has been added to your inventory*" << endl << endl;
+        return true;
+}
+
+void User::prepareNextRound() 
+{
+    this->HP = 100;
+    this->LVL++;
+}
+
+short User::retrievePlayerLevel() {return this->LVL;}

@@ -23,10 +23,11 @@ class User : public Character
 
   public:
     User();
-    short retrievePlayerLevel();
     bool Battle(Character, short);
     void displayInventory();
-    /* void editInventory(); -> to be implemented. this function will allow new items to be added if inventory is empty; if duplicate item obtained, will increment. */
+    bool editInventory(string); 
+    void prepareNextRound();
+    short retrievePlayerLevel();
 
     
 };
