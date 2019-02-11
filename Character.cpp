@@ -3,7 +3,7 @@
 #include "Character.h"
 #include "Windows.h"
 using namespace std;
-
+//test1234
 bool User::Battle(Character Monster, short level) {
     srand(time(NULL));
     bool win = false;
