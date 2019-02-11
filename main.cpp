@@ -4,34 +4,34 @@
 #include "Character.h"
 using namespace std;
 
-int main()
-{
+int main() {
     bool win = true;
     User Player;
     Character Monster;
-    short levelCount = 0;
 
-    cout << endl << "Battle " << levelCount + 1 << endl << "-----------------" << endl << endl;
+    cout << endl
+         << "Battle " << Player.retrievePlayerLevel() + 1 << endl
+         << "-----------------" << endl
+         << endl;
     Sleep(2000);
-    win = Player.Battle(Monster, levelCount);
+    win = Player.Battle(Monster, Player.retrievePlayerLevel());
 
-    while(true)
-    {
-        if (win)
-        {
-            levelCount++;
-            User Player;
-            Character Monster(levelCount);
-            cout << endl << "Battle " << levelCount + 1 << endl << "-----------------" << endl;
-            Sleep(2000);
-            win = Player.Battle(Monster, levelCount);
-
-        }
-        else
-        {
+    while (true) {
+        if (win) {
+            Player.afterBattle();
+            cout << "You got " << Player.GOLDCOLLECT << " gold from winning the battle!\nYou have a total of: " << Player.GOLD << " Gold!"
+                 << endl;
+            Player.prepareNextRound();
+            Character Monster(Player.retrievePlayerLevel());
+            cout << endl
+                 << "Battle " << Player.retrievePlayerLevel() + 1 << endl
+                 << "-----------------" << endl;
+           Sleep(2000);
+            win = Player.Battle(Monster, Player.retrievePlayerLevel());
+        } else {
             win = false;
             cout << "You LOSE!" << endl;
-            cout << "Kills: " << levelCount;
+            cout << "Kills: " << Player.retrievePlayerLevel();
             break;
         }
     }
