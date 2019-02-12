@@ -1,9 +1,9 @@
 #include <iostream>
 #include <time.h>
 #include "Character.h"
-#include "Windows.h"
+#include <unistd.h>
 using namespace std;
-//test1234
+
 bool User::Battle(Character Monster, short level) {
     srand(time(NULL));
     bool win = false;
@@ -34,14 +34,14 @@ bool User::Battle(Character Monster, short level) {
             cout << "You did " << damage + Monster.ARMOR << " damage!" << endl;
             if (damage == 0)
                 cout << "You Missed Idiot." << endl;
-            Sleep(1000);
+           usleep(1000000);
             if (Monster.HP <= 0) {
                 cout << "You have killed " << Monster.NAME << " " << level + 1 << "!" << endl
                      << endl;
                 cout << "You have obtained a health potion!" << endl;
                 bool obtained = editInventory("health potion");
                 cout << "Get ready for the next monster. He will be tougher." << endl;
-                Sleep(1000);
+               usleep(100000);
                 win = true;
                 break;
             }
@@ -52,11 +52,11 @@ bool User::Battle(Character Monster, short level) {
                  << endl;
             if (damage == 0)
                 cout << "LUL it missed!!!!!!!!! lulululululul!" << endl;
-            Sleep(1000);
+           usleep(1000000);
             if (this->HP <= 0) {
                 cout << Monster.NAME << " " << level + 1 << " has killed you!" << endl
                      << endl;
-                Sleep(1000);
+              usleep(1000000);
                 win = false;
                 break;
             }
@@ -77,7 +77,7 @@ bool User::Battle(Character Monster, short level) {
                 cout << "-------------------------------------------------------" << endl
                      << endl;
             }
-            Sleep(1000);
+           usleep(1000000);
         }
     }
 
@@ -171,11 +171,13 @@ void User::afterBattle() {
 
 void User::shop(){
     int shopOption;
-    cout << "Welcome to my shop young warrier!\nWhat are you looking for?" << endl;
+
+    cout << "Welcome to my shop young warrior!\nWhat are you looking for?" << endl;
 
     while (true) {
-        cout << "[1] health increase\t 20 gold" << endl;
-        cout << "You currently have [" << GOLDCOLLECT <<  "] gold" << endl;
+        cout << "[1] 20 HP increase\t" << healthbonus_ << " gold" << endl;
+        cout << "[2] 20 DMG increase\t" << damagebonus_ << " gold" << endl;
+        cout << "You currently have [" << GOLD <<  "] gold" << endl;
         cout << "press [0] to quit"<< endl;
         cin >> shopOption;
         if (shopOption == 0){
@@ -183,12 +185,14 @@ void User::shop(){
         }
 
         if (shopOption == 1) {
-            if (GOLDCOLLECT >= 20) {
+            if (GOLD >= healthbonus_) {
                 cout << "health successfully increased" << endl;
-                GOLDCOLLECT -= 20;
-                this-> Healthbonus += 20;
+                GOLD -= healthbonus_;
+                this-> Healthbonus += healthbonus_;
                 cout << "you currently have:" << this->Healthbonus + this->HP << " HP" << endl;
                 this->HP += this->Healthbonus;
+                healthbonus_ += 20;
+
 
 
             }
@@ -197,6 +201,23 @@ void User::shop(){
                 cout << "you don't have enough gold" << endl;
             }
 
+
+
+        }
+
+        if (shopOption == 2){
+            if (GOLDCOLLECT >= damagebonus_){
+
+                this->DAMAGE += damagebonus_;
+                cout << "You are now do " << this->DAMAGE << " damage!!"  << endl;
+                GOLD -= damagebonus_;
+                damagebonus_ += 20;
+
+            }
+            else{
+
+                cout << "you don't have enough gold" << endl;
+            }
 
 
         }
