@@ -1,9 +1,9 @@
 #include <iostream>
 #include <string>
-#include "Windows.h"
+#include <unistd.h>
 #include "Character.h"
 using namespace std;
-
+//
 int main() {
     bool win = true;
     User Player;
@@ -13,7 +13,7 @@ int main() {
          << "Battle " << Player.retrievePlayerLevel() + 1 << endl
          << "-----------------" << endl
          << endl;
-    Sleep(2000);
+    usleep(2000000);
     win = Player.Battle(Monster, Player.retrievePlayerLevel());
 
     while (true) {
@@ -26,7 +26,7 @@ int main() {
             cout << endl
                  << "Battle " << Player.retrievePlayerLevel() + 1 << endl
                  << "-----------------" << endl;
-           Sleep(2000);
+           usleep(2000000);
             win = Player.Battle(Monster, Player.retrievePlayerLevel());
         } else {
             win = false;
@@ -36,4 +36,4 @@ int main() {
         }
     }
 }
-//test
+//
