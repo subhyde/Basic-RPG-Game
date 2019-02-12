@@ -19,7 +19,10 @@ public:
 class User : public Character {
     short KILLS;
     string INVENTORY[4][4] = {{"health potion", "damage boost potion", "shield potion", "instakill potion"},
+
                               {"0",             "0",                   "0",             "0"}};
+    int healthbonus_ = 20;
+    int damagebonus_  = 20;
 
 public:
     int GOLD;
