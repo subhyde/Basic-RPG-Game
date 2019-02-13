@@ -9,12 +9,11 @@ int main() {
     User Player;
     Character Monster;
 
-
     cout << endl
          << "Battle " << Player.retrievePlayerLevel() + 1 << endl
          << "-----------------" << endl
          << endl;
-    usleep(2000000);
+    usleep(200000);
     win = Player.Battle(Monster, Player.retrievePlayerLevel());
 
     while (true) {
@@ -22,36 +21,14 @@ int main() {
             Player.afterBattle();
             cout << "You got " << Player.GOLDCOLLECT << " gold from winning the battle!\nYou have a total of: " << Player.GOLD << " Gold!"
                  << endl;
-
-
-    cout << endl
-         << "Battle " << Player.retrievePlayerLevel() + 1 << endl
-         << "-----------------" << endl
-         << endl;
-    Sleep(2000);
-    win = Player.Battle(Monster, Player.retrievePlayerLevel());
-
-    while (true)
-    {
-        if (win)
-        {
-
             Player.prepareNextRound();
             Character Monster(Player.retrievePlayerLevel());
             cout << endl
                  << "Battle " << Player.retrievePlayerLevel() + 1 << endl
                  << "-----------------" << endl;
-
-           usleep(2000000);
+           usleep(200000);
             win = Player.Battle(Monster, Player.retrievePlayerLevel());
         } else {
-
-            Sleep(2000);
-            win = Player.Battle(Monster, Player.retrievePlayerLevel());
-        }
-        else
-        {
-
             win = false;
             cout << "You LOSE!" << endl;
             cout << "Kills: " << Player.retrievePlayerLevel();
